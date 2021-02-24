@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row">
+    <img src={{post.image}}>
+  </div>
+  <div class="row">
+    <hr />
+    <div class="col-md-9">
+      <div class="row post">
+        
+        <div class="col-md-12">
+          <span class="subreddit-text"><a class="post-url" href="">{{post.subredditName}}</a>
+            <a routerLink="post.url" class="ml-2">{{post.postName}}</a>
+          </span>
+
+          <hr />
+          <div class="mb-3">
+            <p class="post-text" [innerHtml]="post.description"></p>
+            <div>
+              <img class="card-img-top" style="width: 25rem" src={{post.url}}>
+            </div>
+          </div>
+
+
+          
+          <div class="post-comment">
+            <form [formGroup]="commentForm" (ngSubmit)="postComment()">
+              <div class="form-group">
+                <textarea class="form-control" [formControlName]="'text'" placeholder="Your Thoughts?"></textarea>
+              </div>
+              <button type="submit" class="login float-right">Comment</button>
+            </form>
+            <div class="d-flex flex-row votebox">
+              <div>
+                <app-vote-button [post]="post"></app-vote-button>
+              </div>
+              <span>
+                <span> Posted
+                  <span> {{post.duration}} </span>
+                  by              
+                  <a class="username" href="">{{post.userName}}</a>
+                  <div>
+                    <p>{{currentUserId}}</p>
+                  </div>
+                </span>
+              </span>
+            </div>
+          </div>
+          
+          
+          <div style="margin-top: 10px;" *ngFor="let comment of comments">
+            <div class="comment">
+              <div class="username">
+                <a routerLink="/user-profile/comment.username">{{comment.userName}}</a>
+              </div>
+              <div>
+                <p>{{comment.duration}}</p>
+                
+              </div>
+              
+              <b>{{comment.text}}</b>
+              
+              
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 60px;" *ngFor="let SubredditSubscription of subredditSubscriptions">
+      <div >
+        <a>{{SubredditSubscription.id}}</a>
+      
+      </div>
+    </div>
+    <div class="col-md-3">
+      <app-side-bar></app-side-bar>
+      <app-subreddit-side-bar></app-subreddit-side-bar>
+    </div>
+  </div>
+</div>

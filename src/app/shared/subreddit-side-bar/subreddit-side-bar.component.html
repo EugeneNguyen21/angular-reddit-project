@@ -1,0 +1,32 @@
+<div class="sidebar-view-subreddit">
+    
+    <div style="color: black; font-weight: bold">Browse Subreddits</div>
+
+    <button class="btn-sm btn-primary rounded-2 mr-auto" (click)="saveToLocal()"></button>
+
+    <hr />
+    <span *ngFor="let subreddit of subreddits">
+
+        <span class="subreddit-text"><a href="/view-subreddit/{{subreddit.id}}">{{subreddit.name}}</a></span>
+        
+        <div *ngIf="!isSubscribed(subreddit.name, subreddit.id)" >
+            <button id={{subreddit.id}} (click)="subscribeSubreddit(subreddit.id, subreddit.name)" class="btn-sm btn-primary rounded-2 mr-auto" > {{subscribeButtonText}} </button>
+        </div>
+
+        <div *ngIf="isSubscribed(subreddit.name, subreddit.id)">
+            <button id={{subreddit.id}} (click)="leaveSubreddit(subreddit.id, subreddit.name)" class="btn-sm btn-primary rounded-2 mr-auto" >  {{subscribeButtonText}} </button> 
+        </div>
+        
+        <hr />
+
+    </span>
+
+    <span *ngFor="let subredditSubscription of subredditSubscriptions">
+        <span>{{subredditSubscription}}</span>    
+        <br>
+    </span>
+
+    <div style="text-align: center" *ngIf="displayViewAll">
+        <a style="font-weight: bold" routerLink="/list-subreddits">View All</a>
+    </div>
+</div>
